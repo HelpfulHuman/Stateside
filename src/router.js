@@ -64,8 +64,12 @@ class Router extends React.PureComponent {
     var props = omit(this.props, ["component", "history"]);
     var children = this.props.children.map(this.mapChild);
 
+    if (typeof Component !== "function") {
+      props.anyMatched = this.matchedAny;
+    }
+
     return (
-      <Component anyMatched={this.matchedAny} {...props}>
+      <Component {...props}>
         {children}
       </Component>
     );
