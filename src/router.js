@@ -47,6 +47,14 @@ class Router extends React.PureComponent {
       }
     }
 
+    // if (
+    //   child.type === Router &&
+    //   typeof child.props.allowRoute === "function" &&
+    //   !child.props.allowRoute()
+    // ) {
+    //   return null;
+    // }
+
     if (!!child.props.route) {
       var childRoute = (route + child.props.route);
       var exact = (child.props.partialRoute !== true);
@@ -64,7 +72,7 @@ class Router extends React.PureComponent {
     var props = omit(this.props, ["component", "history"]);
     var children = this.props.children.map(this.mapChild);
 
-    if (typeof Component !== "function") {
+    if (typeof Component !== "string") {
       props.anyMatched = this.matchedAny;
     }
 
