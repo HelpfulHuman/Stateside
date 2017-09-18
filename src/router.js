@@ -51,14 +51,6 @@ class Router extends React.PureComponent {
       this.matchedAny = true;
     }
 
-    // if (
-    //   child.type === Router &&
-    //   typeof child.props.allowRoute === "function" &&
-    //   !child.props.allowRoute()
-    // ) {
-    //   return null;
-    // }
-
     if (!!child.props.route) {
       var childRoute = (route + child.props.route);
       var exact = (child.props.partialRoute !== true);
