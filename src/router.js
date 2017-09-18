@@ -76,12 +76,12 @@ class Router extends React.PureComponent {
 /**
  * The default history object used by the Route component(s).
  */
-Route.history = history;
+Router.history = history;
 
 /**
  * Add the history utilities.
  */
-Route.listen = history.listen.bind(history);
+Router.listen = history.listen.bind(history);
 Router.to = history.push.bind(history);
 Router.redirect = history.replace.bind(history);
 Router.back = history.goBack.bind(history);
