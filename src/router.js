@@ -71,7 +71,7 @@ class Router extends React.PureComponent {
       if (typeof child.props.route === "string") {
         var childRoute = (ownRoute + child.props.route);
         var exact = (child.props.partialRoute !== true);
-        var params = parseParams(childRoute, uri, exact);
+        var params = parseParams(childRoute, location.pathname, exact);
         if (params === null) return null;
         matchedAny = true;
         return copy(child, { params, query });
