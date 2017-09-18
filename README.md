@@ -139,3 +139,19 @@ render(
   , document.getElementById("app")
 );
 ```
+
+### Add a Link
+
+You can quickly link to routes using the provided `<Link>` component.  The `<Link>` element takes a `to` prop which the URI you'd like to link to.  If the `to` prop matches the current location, then you can have a class added to the element by passing the desired class name via the `activeClassName` prop.
+
+> **Note:** You can add your own `style` and `className` props like you normally would with an HTML element.
+
+```jsx
+function Nav () {
+  return (
+    <nav>
+      <Link to="/" className="Home">Home</Link>
+      <Link to="/about" activeClassName="isActive">About</Link>
+    </nav>
+  );
+}
