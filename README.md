@@ -76,6 +76,24 @@ render(
 );
 ```
 
+### Add a Function-Based Route
+
+You may need more control over routing beyond a simple path string.  For this, you can use a function which returns a `boolean` value for the `route` prop instead of a string.
+
+```jsx
+var user = { role: "admin" };
+
+function isAdmin (location) {
+  return (user.role === "admin");
+}
+
+render(
+  <Router>
+    <Admin route={isAdmin} />
+  </Router>
+  , document.getElementById("app")
+);
+```
 
 ### Nesting Routers & the `partialRoute` Prop
 
