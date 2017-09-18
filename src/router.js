@@ -29,9 +29,8 @@ class Router extends React.PureComponent {
   }
 
   handleChange (location) {
-    this.matchedAny = false;
-    if (this.isAllowed(this.props, this.context)) {}
-    this.setState(createState(location));
+    var nextState = this.processRoute(location, this.props, this.context);
+    this.setState(nextState);
   }
 
   processRoute (location, props, context) {
@@ -42,7 +41,7 @@ class Router extends React.PureComponent {
     var query = parseQuery(location.search);
 
     // Get the route path for this router (if any)
-    var ownRoute = (props.route || "");
+    var ownRoute = (typeof props.route === "string" ? props.route : "");
 
     // TODO: Move defaultRoute children to the end of the list
     // Mull over each child prop and add it to the list if possible
