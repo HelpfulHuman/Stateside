@@ -1,4 +1,4 @@
-# Router Tag
+# Stateside: A React Router
 
 There are a number of great routing solutions for React, however, sometimes you just want a router that works without a bunch of set up or special rules.  That's where this library comes in.
 
@@ -7,7 +7,7 @@ There are a number of great routing solutions for React, however, sometimes you 
 Install via `npm`:
 
 ```shell
-npm install --save router-tag
+npm install --save stateside
 ```
 
 ### Add Some Routes
@@ -19,7 +19,7 @@ Let's demonstrate how routing works by adding a home and about page.  Just creat
 ```jsx
 import * as React from "react";
 import { render } from "react-dom";
-import { Router } from "router-tag";
+import { Router } from "stateside";
 
 function Home () {
   return <h1>Home</h1>
@@ -103,7 +103,7 @@ Sometimes you may need to redirect users to other routes when certain conditions
 ```jsx
 import * as React from "react";
 import { render } from "react-dom";
-import { Router, createRedirector } from "router-tag";
+import { Router, createRedirector } from "stateside";
 
 var state = { userLoggedIn: true };
 
