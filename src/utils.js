@@ -2,19 +2,6 @@ import * as React from "react";
 import pathToRegexp from "path-to-regexp";
 
 /**
- * Create the state update for the given location.
- *
- * @param  {Object} location
- * @return {Object}
- */
-export function createState (location) {
-  return {
-    uri: location.pathname,
-    query: parseQuery(location.search),
-  };
-}
-
-/**
  * Copy the given child and add the new props.
  *
  * @param  {Element} child
