@@ -2,7 +2,8 @@
   "name": "stateside",
   "version": "1.0.0",
   "description": "Super simplified router implementation for React.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "jsnext:main": "dist/index.es.js",
   "scripts": {
     "preversion": "npm test",
     "version": "npm run build",
