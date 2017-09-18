@@ -15,19 +15,19 @@ export default function withRedirect (redirectTo) {
       constructor (props, context) {
         super(props, context);
         this.displayName = `Redirector(${componentName})`;
-        this.state = { loading: false };
+        this.state = { show: true };
       }
 
       checkRedirect (props) {
-        this.setState({ loading: true });
-        Promise
-          .resolve(redirectTo(props))
-          .then(newLocation => {
-            this.setState({ loading: false });
-            if (props.anyMatched && typeof newLocation === "string") {
-              Router.redirect(newLocation);
-            }
-          });
+        var newLocation = redirectTo(props);
+        if (props.anyMatched && typeof newLocation === "string") {
+          this.setState({ show: false });
+          if (newLocation !== window.location) {
+            Router.redirect(newLocation);
+          }
+        } else {
+          this.setState({ show: true });
+        }
       }
 
       componentDidMount () {
@@ -39,7 +39,7 @@ export default function withRedirect (redirectTo) {
       }
 
       render () {
-        if (!this.state.loading && this.props.anyMatched) {
+        if (this.props.anyMatched && this.state.show) {
           var props = omit(this.props, ["anyMatched"]);
           return (
             <Component {...props}>
