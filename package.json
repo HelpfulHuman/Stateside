@@ -1,11 +1,18 @@
 {
-  "name": "@helpfulhuman/stateside",
+  "name": "stateside",
   "version": "1.0.0",
   "description": "Super simplified router implementation for React.",
   "main": "index.js",
   "scripts": {
+    "preversion": "npm test",
+    "version": "npm run build",
+    "postversion": "git push origin master && git push origin master --tags",
+    "clean": "rm -rf dist/",
     "build": "rollup -c",
-    "test": ""
+    "watch": "npm run build -- --watch",
+    "test": "mocha",
+    "tdd": "npm run watch | npm run test -- --watch",
+    "prepublish": "npm run clean && npm run build && npm run test"
   },
   "repository": {
     "type": "git",
