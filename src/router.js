@@ -51,19 +51,13 @@ class Router extends React.PureComponent {
         return (!matchedAny ? child : null);
       }
 
-      // If this is another <Router /> instance, it counts towards our matched routes
-      if (child.type === Router) {
-        matchedAny = true;
-      }
-
       // If the child has a function for the `route` prop, show the child if it returns true
       if (typeof child.props.route === "function") {
         if (child.props.route(location)) {
           matchedAny = true;
           return copy(child, { params: {}, query });
-        } else {
-          return null;
         }
+        return null;
       }
 
       // If the child has the `route` path prop, then check if the path matches the location pathname
@@ -71,9 +65,16 @@ class Router extends React.PureComponent {
         var childRoute = (ownRoute + child.props.route);
         var exact = (child.props.partialRoute !== true);
         var params = parseParams(childRoute, location.pathname, exact);
-        if (params === null) return null;
+        if (params !== null) {
+          matchedAny = true;
+          return copy(child, { params, query });
+        }
+        return null;
+      }
+
+      // If this is another <Router /> instance, it counts towards our matched routes
+      if (child.type === Router) {
         matchedAny = true;
-        return copy(child, { params, query });
       }
 
       // Return the original child as a fallback
