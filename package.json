@@ -1,7 +1,7 @@
 {
-  "name": "route-tag",
+  "name": "router-tag",
   "version": "1.0.0",
-  "description": "Super simplified route implementation for React.",
+  "description": "Super simplified router implementation for React.",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nickglenn/route-tag.git"
+    "url": "git+https://github.com/nickglenn/router-tag.git"
   },
   "keywords": [
     "react",
@@ -23,9 +23,9 @@
   "author": "Nick Glenn <nick@helpfulhuman.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nickglenn/route-tag/issues"
+    "url": "https://github.com/nickglenn/router-tag/issues"
   },
-  "homepage": "https://github.com/nickglenn/route-tag#readme",
+  "homepage": "https://github.com/nickglenn/router-tag#readme",
   "dependencies": {
     "history": "^4.7.2",
     "object.omit": "^3.0.0",
