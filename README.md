@@ -114,25 +114,32 @@ render(
 
 ### Route Redirects
 
-Sometimes you may need to redirect users to other routes when certain conditions take place.  This is where the `createRedirector()` utility can be helpful.  For example, let's say you have a group of routes that require the user to be logged in... We can use the `createRedirector()` function to create a new component that will redirect the user to the returned pathname from the given function.
-
-> **Note:**  You can use the `createRedirector()` function as a higher-order component by passing the base component as the second parameter.
+Sometimes you may need to redirect users to other routes when certain conditions take place.  This is where the `withRedirect()` higher-order component can be helpful.  For example, let's say you have a group of routes that require the user to be logged in. We can use the `withRedirect()` function to create a new component that will redirect the user to the returned pathname from the given function.
 
 ```jsx
 import * as React from "react";
 import { render } from "react-dom";
-import { Router, createRedirector } from "stateside";
+import { Router, withRedirect } from "stateside";
 
 var state = { userLoggedIn: true };
 
-const LoggedIn = createRedirector(function (props) {
+function SecretLayout (props) {
+  return (
+    <div className="Secret">
+      Logged In:
+      {props.children}
+    </div>
+  );
+}
+
+const SecretSection = withRedirect(function (props) {
   return (!state.userLoggedIn ? "/login" : null);
-});
+})(SecretLayout);
 
 render(
   <Router>
     <Login route="/login" />
-    <Router component={LoggedIn}>
+    <Router component={SecretSection}>
       <SecretPage route="/" />
     </Router>
   </Router>

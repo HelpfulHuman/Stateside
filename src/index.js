@@ -1,5 +1,10 @@
 import Router from "./router";
-import createRedirector from "./redirect";
 import Link from "./link";
+import withRedirect from "./withRedirect";
 
-export { Router, Link, createRedirector }
+export function createRedirector (redirectTo) {
+  console.warn("OBSOLETE: It's recommended that you use the new withRedirect() HOC function instead.");
+  return withRedirect(redirectTo)("div");
+}
+
+export { Router, Link, withRedirect }
