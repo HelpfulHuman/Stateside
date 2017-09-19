@@ -1,3 +1,5 @@
 examples/
 src/
 test/
+.gitignore
+rollup.config.js
