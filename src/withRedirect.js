@@ -23,7 +23,6 @@ export default function withRedirect (redirectTo) {
         if (props.anyMatched && typeof newLocation === "string") {
           this.setState({ show: false });
           if (newLocation !== location.pathname) {
-            console.log("redirect -> " + newLocation)
             Router.redirect(newLocation);
           }
         } else {
