@@ -10,6 +10,13 @@ export default function withRedirect (redirectTo) {
   return function (Component) {
     var componentName = (Component.displayName || Component.name);
 
+    if (typeof Component === "string") {
+      var C = Component;
+      Component = function (props) {
+        return (<C>{props.children}</C>);
+      }
+    }
+
     return class extends React.PureComponent {
 
       constructor (props, context) {
