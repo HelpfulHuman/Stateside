@@ -45,7 +45,7 @@ class Router extends React.PureComponent {
 
     // TODO: Move defaultRoute children to the end of the list
     // Mull over each child prop and add it to the list if possible
-    mappedChildren = props.children.map(child => {
+    mappedChildren = React.Children.map(props.children, (child => {
       // Default route should only fire if we haven't matched anything yet
       if (child.props.defaultRoute === true) {
         return (!matchedAny ? child : null);
