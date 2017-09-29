@@ -55,7 +55,7 @@ class Router extends React.PureComponent {
       // If the child has a function for the `route` prop, show the child if it returns true
       if (typeof child.props.route === "function") {
         if (matchedAny && matchOne) return null;
-        if (child.props.route(location)) {
+        if (child.props.route(location) === true) {
           matchedAny = true;
           return copy(child, { params: {}, query, location });
         }
