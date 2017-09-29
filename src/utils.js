@@ -64,5 +64,5 @@ export function parseQuery (query) {
  * @return {String}
  */
 export function normalizePath (path) {
-  return path.replace(/\/*$/, "/");
+  return path.replace(/\/*$/, "");
 }
