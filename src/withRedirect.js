@@ -46,7 +46,7 @@ export default function withRedirect (redirectTo) {
       }
 
       render () {
-        if (this.props.anyMatched && this.state.show) {
+        if (this.state.show) {
           var props = omit(this.props, ["anyMatched"]);
           return (
             <Component {...props}>
