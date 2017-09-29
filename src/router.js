@@ -90,7 +90,7 @@ class Router extends React.PureComponent {
 
   render () {
     var Component = (this.props.component || "div");
-    var props = omit(this.props, ["component", "history", "route", "defaultRoute", "query", "params"]);
+    var props = omit(this.props, ["component", "history", "route", "defaultRoute", "query", "params", "onlyShowOne"]);
 
     if (typeof Component !== "string") {
       props = Object.assign(props, {
