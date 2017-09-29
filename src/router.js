@@ -36,6 +36,7 @@ class Router extends React.PureComponent {
   processRoute (location, props, context) {
     var matchedAny      = false;
     var mappedChildren  = [];
+    var matchOne        = (!!this.props.onlyShowFirst || false);
 
     // Parse the query string parameters into an object
     var query = parseQuery(location.search);
@@ -53,27 +54,30 @@ class Router extends React.PureComponent {
 
       // If the child has a function for the `route` prop, show the child if it returns true
       if (typeof child.props.route === "function") {
+        if (matchedAny && matchOne) return null;
         if (child.props.route(location)) {
           matchedAny = true;
-          return copy(child, { params: {}, query });
+          return copy(child, { params: {}, query, location });
         }
         return null;
       }
 
       // If the child has the `route` path prop, then check if the path matches the location pathname
       if (typeof child.props.route === "string") {
+        if (matchedAny && matchOne) return null;
         var childRoute = (ownRoute + child.props.route);
         var exact = (child.props.partialRoute !== true);
         var params = parseParams(childRoute, location.pathname, exact);
         if (params !== null) {
           matchedAny = true;
-          return copy(child, { params, query });
+          return copy(child, { params, query, location });
         }
         return null;
       }
 
       // If this is another <Router /> instance, it counts towards our matched routes
       if (child.type === Router) {
+        if (matchedAny && matchOne) return null;
         matchedAny = true;
       }
 

@@ -112,6 +112,20 @@ render(
 );
 ```
 
+### Select-Style Routing
+
+It's likely you'll run into a case where strict route paths collide with token paths.  For example, if you had a `/items/new` route for creating new items and a `/items/:id` route for viewing or editing existing items.  To resolve this, you can tell the `<Router>` to only match the first route-matchable child using the `onlyShowFirst` prop.
+
+```jsx
+render(
+  <Router onlyShowFirst>
+    <CreateItem route="/items/new" />
+    <ViewItem route="/items/:id" />
+  </Router>
+  , document.getElementById("app")
+);
+```
+
 ### Route Redirects
 
 Sometimes you may need to redirect users to other routes when certain conditions take place.  This is where the `withRedirect()` higher-order component can be helpful.  For example, let's say you have a group of routes that require the user to be logged in. We can use the `withRedirect()` function to create a new component that will redirect the user to the returned pathname from the given function.
