@@ -23,6 +23,8 @@ export function copy (child, props) {
  * @return {Object}
  */
 export function parseParams (path, uri, exact) {
+  path = normalizePath(path);
+  uri  = normalizePath(uri);
   var arg, key, keys = [], params = {};
   var args = pathToRegexp(path, keys, { end: exact }).exec(uri);
   if (args) {
@@ -53,4 +55,14 @@ export function parseQuery (query) {
     }
   }
   return output;
+}
+
+/**
+ * Normalize a path to end with a single, trailing "/".
+ *
+ * @param  {String} path
+ * @return {String}
+ */
+export function normalizePath (path) {
+  return path.replace(/\/*$/, "/");
 }
