@@ -21,11 +21,13 @@ class Router extends React.PureComponent {
   }
 
   componentWillMount () {
-    this.history.listen(this.handleChange);
+    this.unlisten = this.history.listen(this.handleChange);
   }
 
   componentWillUnmount () {
-    this.history.unlisten(this.handleChange);
+    if (typeof this.unlisten === "function") {
+      this.unlisten();
+    }
   }
 
   handleChange (location) {
