@@ -1,8 +1,8 @@
-import buble from "rollup-plugin-buble";
+import typescript from "rollup-plugin-typescript2";
 import resolve from "rollup-plugin-node-resolve";
 
 export default {
-  input: "src/index.js",
+  input: "src/index.tsx",
   output: [
     { file: "dist/index.js", format: "cjs" },
     { file: "dist/index.es.js", format: "es" },
@@ -12,12 +12,10 @@ export default {
     "react",
     "object.omit",
     "path-to-regexp",
-    "history/createBrowserHistory",
+    "history",
   ],
   plugins: [
-    resolve({ jsnext: true }),
-    buble({
-      objectAssign: "Object.assign",
-    }),
+    resolve({ main: true, jsnext: true }),
+    typescript(),
   ],
 }
