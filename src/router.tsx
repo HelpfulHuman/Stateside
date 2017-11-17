@@ -22,6 +22,7 @@ export interface RouterProps extends RouteProps{
   children?: React.ReactChild|React.ReactChild[];
   className?: string;
   style?: object;
+  [key: string]: any;
 }
 
 export interface RouterState {
@@ -31,7 +32,7 @@ export interface RouterState {
   query?: object;
 }
 
-class Router extends React.PureComponent<RouterProps, RouterState> {
+export class Router extends React.PureComponent<RouterProps, RouterState> {
 
   history: History;
   unlisten?(): void;

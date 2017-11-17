@@ -1,19 +1,18 @@
 var dotenv            = require("dotenv");
-var webpack           = require("@webpack-blocks/webpack2");
-var babel             = require("@webpack-blocks/babel6");
-var devServer         = require("@webpack-blocks/dev-server");
+var webpack           = require("webpack-blocks");
+var typescript        = require("@webpack-blocks/typescript");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 
-dotenv.load({ silent: true });
+dotenv.config({ silent: true });
 
 module.exports = webpack.createConfig([
-  webpack.entryPoint("./src/index.js"),
+  webpack.entryPoint("./src/index.tsx"),
   webpack.setOutput("./public/app.js"),
-  babel({ presets: ["env", "react"] }),
+  typescript(),
   webpack.addPlugins([
     new HtmlWebpackPlugin({
       inject: true,
-      template: './index.html'
+      template: "./index.html",
     }),
   ]),
   webpack.defineConstants({
@@ -21,6 +20,6 @@ module.exports = webpack.createConfig([
   }),
   webpack.env("development", [
     webpack.sourceMaps(),
-    devServer(),
+    webpack.devServer(),
   ]),
 ]);

@@ -1,15 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Router, Link, withRedirect } from "stateside";
+import {Router, Link, withRedirect, RouteProps} from "../../src";
 
 
-class App extends React.PureComponent {
+interface AppState {
+  loggedIn: boolean;
+}
+
+class App extends React.PureComponent<any, AppState> {
+
+  state: AppState = { loggedIn: false };
+
   constructor (props, context) {
     super(props, context);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleGreeting = this.handleGreeting.bind(this);
-    this.state = { loggedIn: false };
   }
 
   login () {
@@ -74,7 +80,11 @@ const LoggedInOnly = withRedirect(function (props) {
 });
 
 
-function Login ({ onLogin }) {
+interface LoginProps extends RouteProps {
+  onLogin(): void;
+}
+
+function Login({ onLogin }: LoginProps) {
   return (
     <div>
       Welcome!  Please log in...
@@ -84,14 +94,19 @@ function Login ({ onLogin }) {
 }
 
 
-function Home (props) {
+function Home(props: RouteProps) {
   return (
     <h1>Home Page</h1>
   );
 }
 
 
-function Greet ({ params }) {
+interface GreetProps extends RouteProps {
+  name?: string;
+  params?: {name?: string};
+}
+
+function Greet({ params }: GreetProps) {
   var name = (params.name || "World");
   return (
     <h1>Hello, {name}!</h1>
@@ -99,17 +114,24 @@ function Greet ({ params }) {
 }
 
 
-class GreetForm extends React.PureComponent {
-  constructor (props, context) {
+interface GreetFormProps extends RouteProps {
+  onGreet(val: string): void;
+}
+
+class GreetForm extends React.PureComponent<GreetFormProps> {
+
+  nameInput: HTMLInputElement;
+
+  constructor(props, context) {
     super(props, context);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick () {
+  handleClick() {
     this.props.onGreet(this.nameInput.value);
   }
 
-  render () {
+  render() {
     return (
       <div>
         <input type="text" ref={c => this.nameInput = c} placeholder="Enter Your Name" />
@@ -120,7 +142,7 @@ class GreetForm extends React.PureComponent {
 }
 
 
-function NotFound (props) {
+function NotFound(props: RouteProps) {
   return (
     <h1>Not Found</h1>
   );
@@ -130,4 +152,4 @@ function NotFound (props) {
 ReactDOM.render(
   <App />
   , document.getElementById("root")
-)
+);

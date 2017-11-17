@@ -15,10 +15,10 @@ export interface RedirectHOCProps {
 }
 
 export interface RedirectHOC<Props> {
-  (Component: (React.ComponentType|string)): React.ComponentClass<Props>;
+  (Component: (React.ComponentType<any>|string)): React.ComponentClass<Props>;
 }
 
-export default function withRedirect<Props = any>(redirectTo: GetRedirectURL<Props>): RedirectHOC<Props> {
+export function withRedirect<Props = any>(redirectTo: GetRedirectURL<Props>): RedirectHOC<Props> {
   if (typeof redirectTo !== "function") {
     throw new Error("Bad Argument: The redirectTo argument must be a function that returns a URL to redirect to or null.")
   }
