@@ -176,3 +176,27 @@ function Nav () {
     </nav>
   );
 }
+```
+
+## Typescript
+
+### `route` Prop Issue
+
+If intellisense or your compiler is complaining about adding Stateside specific props to your routed components (and `any` is not an option), then you can use the `RouteProps` interface exposed by this library.
+
+```tsx
+import * as React from "react";
+import {RouteProps} from "stateside";
+
+export interface MyComponentProps extends RouteProps {
+  someValue?: any;
+}
+
+export function MyComponent(props: MyComponentProps) {
+  return (
+    <div>
+      Example Component
+    </div>
+  );
+}
+```
