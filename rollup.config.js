@@ -10,7 +10,6 @@ export default {
   exports: "named",
   external: [
     "react",
-    "object.omit",
     "path-to-regexp",
     "history",
   ],
