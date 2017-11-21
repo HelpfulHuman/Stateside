@@ -125,7 +125,7 @@ export class Router extends React.PureComponent<RouterProps, RouterState> {
 
   render() {
     var {component, route, defaultRoute, onlyShowFirst, params, ...props} = this.props;
-    var Component = (this.props.component || "div");
+    var Component = (component || "div");
 
     if (typeof Component !== "string") {
       props = Object.assign(props, {
