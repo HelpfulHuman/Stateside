@@ -12,6 +12,7 @@ export default {
     "react",
     "path-to-regexp",
     "history",
+    "prop-types",
   ],
   plugins: [
     resolve({ main: true, jsnext: true }),

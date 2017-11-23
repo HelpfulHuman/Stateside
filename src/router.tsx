@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import {History, UnregisterCallback} from "history";
 import defaultHistory from "./history";
 import {copy, parseParams, parseQuery} from "./utils";
@@ -16,7 +17,7 @@ export interface RouteChild {
 }
 
 export interface RouterProps extends RouteProps{
-  component: React.ComponentType | string;
+  component?: React.ComponentType | string;
   history?: History;
   onlyShowFirst?: boolean;
   children?: React.ReactChild|React.ReactChild[];
@@ -32,10 +33,27 @@ export interface RouterState {
   query?: object;
 }
 
+const historyPropShape = PropTypes.shape({
+  listen: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  replace: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
+  goForward: PropTypes.func.isRequired,
+});
+
 export class Router extends React.PureComponent<RouterProps, RouterState> {
 
   history: History;
+
   unlisten?(): void;
+
+  static contextTypes: any = {
+    history: historyPropShape,
+  }
+
+  static childContextTypes: any = {
+    history: historyPropShape,
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -125,7 +143,7 @@ export class Router extends React.PureComponent<RouterProps, RouterState> {
 
   render() {
     var {component, route, defaultRoute, onlyShowFirst, params, ...props} = this.props;
-    var Component = (this.props.component || "div");
+    var Component = (component || "div");
 
     if (typeof Component !== "string") {
       props = Object.assign(props, {

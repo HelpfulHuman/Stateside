@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as pathToRegexp from "path-to-regexp";
 
+const p2reg = pathToRegexp as any;
+
 /**
  * Copy the given child and add the new props.
  */
@@ -17,7 +19,7 @@ export function parseParams<T = object>(path: string, uri: string, exact: boolea
   path = normalizePath(path);
   uri  = normalizePath(uri);
   var arg, key, keys = [], params = {};
-  var args = pathToRegexp(path, keys, { end: exact }).exec(uri);
+  var args = p2reg(path, keys, { end: exact }).exec(uri);
   if (args) {
     args = args.slice(1) as RegExpExecArray;
     for (var i = 0; i < args.length; i++) {

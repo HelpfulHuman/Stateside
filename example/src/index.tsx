@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {Router, Link, withRedirect, RouteProps} from "../../src";
+import {Router, defaultHistory, Link, withRedirect, RouteProps} from "../../src";
 
 
 interface AppState {
@@ -19,11 +19,15 @@ class App extends React.PureComponent<any, AppState> {
   }
 
   login () {
-    this.setState({ loggedIn: true });
+    this.setState({ loggedIn: true }, function () {
+      defaultHistory.push("/");
+    });
   }
 
   logout () {
-    this.setState({ loggedIn: false });
+    this.setState({ loggedIn: false }, function () {
+      defaultHistory.push("/login");
+    });
   }
 
   handleGreeting (name) {
@@ -32,14 +36,13 @@ class App extends React.PureComponent<any, AppState> {
 
   render () {
     return (
-      <div>
-        <Router
+      <Router onlyShowFirst>
+        <Login route="/login"
           loggedIn={this.state.loggedIn}
-          component={GuestOnly}>
-          <Login route="/login" onLogin={this.login} />
-          <NotFound defaultRoute />
-        </Router>
+          onLogin={this.login} />
         <Router
+          route="/"
+          partialRoute
           onLogout={this.logout}
           loggedIn={this.state.loggedIn}
           component={LoggedInOnly}>
@@ -49,18 +52,17 @@ class App extends React.PureComponent<any, AppState> {
             route="/greet"
             partialRoute
             onGreet={this.handleGreeting} />
-          <NotFound defaultRoute />
         </Router>
-      </div>
+        <NotFound defaultRoute />
+      </Router>
     );
   }
 }
 
 
-const GuestOnly = withRedirect(function (props) {
+const isGuestOnly = withRedirect(function (props) {
+  console.log("is guest only triggered...", props)
   return (props.loggedIn ? "/" : null);
-})(function ({ children }) {
-  return (<div>{children}</div>);
 });
 
 
@@ -84,14 +86,14 @@ interface LoginProps extends RouteProps {
   onLogin(): void;
 }
 
-function Login({ onLogin }: LoginProps) {
+const Login = isGuestOnly(function (props: LoginProps) {
   return (
     <div>
       Welcome!  Please log in...
-      <a onClick={onLogin}>Login</a>
+      <a onClick={props.onLogin}>Login</a>
     </div>
   );
-}
+});
 
 
 function Home(props: RouteProps) {
