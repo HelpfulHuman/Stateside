@@ -1,5 +1,7 @@
 example/
 src/
 test/
+.rpt2_cache/
 .gitignore
 rollup.config.js
+*.log
