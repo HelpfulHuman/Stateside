@@ -19,9 +19,9 @@ export class Link extends React.PureComponent<LinkProps> {
   context: Context;
 
   static defaultProps = {
-    style: null,
-    className: null,
-    activeClassName: null,
+    style: {},
+    className: "",
+    activeClassName: "",
     component: "a",
   };
 
