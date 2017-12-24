@@ -22,7 +22,7 @@ export class Link extends React.PureComponent<LinkProps> {
     style: null,
     className: null,
     activeClassName: null,
-    component: "div",
+    component: "a",
   };
 
   constructor(props: LinkProps, context: Context) {
